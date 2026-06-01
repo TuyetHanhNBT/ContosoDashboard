@@ -1,50 +1,39 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: placeholder -> 1.0.0
+Modified principles: added Training-First Transparency; Security Discipline; Service-Layer Authorization; Minimal Observable Design; Spec-Driven Development
+Added sections: Additional Constraints, Development Workflow
+Removed sections: none
+Templates requiring review: .specify/templates/plan-template.md ⚠ review for gate alignment; .specify/templates/spec-template.md ⚠ review for acceptance criteria alignment; .specify/templates/tasks-template.md ⚠ review for task organization alignment
+Follow-up TODOs: none
+-->
+
+# ContosoDashboard Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Training-First Transparency
+The repository exists to teach Spec-Driven Development through a runnable, self-contained training application. All changes MUST preserve the offline, mock-auth training model and keep architecture intentionally simple. Any feature that would require paid cloud services or external dependencies MUST be documented as a training-only tradeoff.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Security Discipline
+Even for a training app, authorization MUST be enforced at the page, service, and data layers. Mock authentication is acceptable only for local training, and any identity or access-control change MUST clearly state its training-only status. Security headers, RBAC, and IDOR protections are mandatory for all protected workflows.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Service-Layer Authorization
+Business logic MUST be implemented through services that enforce user permissions, not only UI checks. Data access MUST be restricted by identity and project membership rules before returning objects. Any authorization gap discovered in service code is treated as a defect.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Minimal Observable Design
+Features MUST remain simple, maintainable, and observable. Prefer explicit state, predictable service behavior, and clear user flows over complex abstractions. Debuggability in training is achieved through deterministic service methods and explicit UI state rather than hidden side effects.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Spec-Driven Development
+All feature work MUST use `.specify` artifacts: spec, plan, and tasks templates. Changes MUST be documented in the Spec Kit workflow before implementation. Every new feature MUST identify user stories, acceptance criteria, and measurable success conditions.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints
+This application is training-only; it is not production software. Do not add dependencies that require a paid cloud account or external service unless the repository clearly separates them behind an abstraction. The app MUST remain runnable locally with EF Core and SQL Server/LocalDB. Preserve the current mock authentication pattern for training and clearly label any future identity changes as “training implementation only.”
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+Start by filling `specs/[feature]/spec.md` and `plan.md` using the `.specify/templates` guidance. Use `tasks.md` to organize implementation by independent user story, with explicit file paths and priority tags. Every PR MUST reference relevant spec/template artifacts and explain how it preserves training constraints. Reviewers MUST verify authorization at both the UI and service layers for each feature. When updating data models, also update the feature spec and service contract documentation.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+The constitution supersedes informal practices for this repository. Amendments require updating this file, incrementing `Version`, and documenting the change in the Sync Impact Report comment. All PRs MUST include a constitution compliance statement describing which principles were followed. The project’s training and security constraints MUST be reviewed on each major feature branch.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-06-01 | **Last Amended**: 2026-06-01
