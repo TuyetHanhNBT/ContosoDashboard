@@ -5,6 +5,12 @@
 **Status**: Draft
 **Input**: User description: "StakeholderDocs/document-upload-and-management-feature.md"
 
+## Clarifications
+
+### Session 2026-06-01
+
+- Q: Should file scanning be implemented as a real malware scan in the training implementation or as a mock training-safe scan? → A: Use a training-safe mock scan with file-type and size validation.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Upload and manage personal or project documents (Priority: P1)
@@ -68,7 +74,8 @@ A document owner wants to share a file with specific users or teams and have the
 - **FR-002**: The system MUST require a document title and category for every upload.
 - **FR-003**: The system MUST accept only supported file types and reject unsupported files with a clear error message.
 - **FR-004**: The system MUST reject files that exceed 25 MB and display a clear size limit error.
-- **FR-005**: The system MUST capture upload metadata including date/time, uploader name, file size, file type, category, project association, and tags.
+- **FR-005**: The system MUST perform a training-safe mock file scan using file-type and size validation before storage; real antivirus integration is a production-only requirement.
+- **FR-006**: The system MUST capture upload metadata including date/time, uploader name, file size, file type, category, project association, and tags.
 - **FR-006**: Users MUST be able to view a list of their own uploaded documents.
 - **FR-007**: Users MUST be able to sort and filter documents by title, upload date, category, project, and file size.
 - **FR-008**: Project team members MUST be able to view all documents associated with their assigned projects.
